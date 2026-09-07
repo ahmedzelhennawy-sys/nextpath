@@ -1,0 +1,17 @@
+{
+  "name": "nextpath-ai-db",
+  "version": "1.0.0",
+  "description": "NEXTPATH AI & Database Engine",
+  "scripts": {
+    "test": "ts-node src/demo.ts"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "@google/genai": "^0.1.1"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.0.0"
+  }
+}
