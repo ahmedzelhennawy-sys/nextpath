@@ -17,8 +17,7 @@
 [The Golden Rule](#-the-golden-rule) •
 [Architecture](#-system-architecture) •
 [Quickstart](#-quickstart--demo) •
-[Data Models](#-data-models--contracts) •
-[Team Integration](#-team-integration-guide)
+[Team & Contributors](#-team--contributors)
 
 ---
 
@@ -139,51 +138,18 @@ cp .env.example .env.local
 npx tsx src/demo.ts
 ```
 
-#### Output Preview:
-```text
-==================================================================
-🚀 NEXTPATH — AI & Deterministic Eligibility Engine Demo
-==================================================================
-
---- 1. Evaluating Opportunities for Student: Omar Hassan ---
-
-📌 Opportunity: Fulbright Foreign Student Program – Egypt
-   Eligibility Status: ELIGIBLE
-   Verdict Summary: You meet all mandatory eligibility criteria.
-   Match Score: 50%
-   Why this match?:
-     ✓ Your major (Computer Science) directly aligns with the opportunity field.
-     ✓ Strong academic standing with GPA of 3.4.
-     ✓ Verified TOEFL score (85).
-
-------------------------------------------------------------------
---- 2. Natural-Language AI Query Parsing ---
-User Query: "Find fully funded AI and machine learning master scholarships for Egyptian students in Europe"
-Parsed SQL / Supabase Filters: {
-  "type": "scholarship",
-  "fundingType": "fully_funded",
-  "locationCountry": "European Union",
-  "nationality": "Egyptian",
-  "field": "AI",
-  "degreeLevel": "master"
-}
-```
-
 ---
 
-## 👥 Team Integration Guide
+## 👥 Team & Contributors
 
-### 🎨 For the Frontend / UI/UX Developer
-- Reference [`src/types.ts`](./src/types.ts) for all UI state management.
-- Render the 4-state badges: `ELIGIBLE`, `LIKELY ELIGIBLE`, `UNKNOWN`, `NOT ELIGIBLE`.
-- Display the `"Why not?"` items from `verdict.whyNot` and `"Why this match?"` from `match.whyThisMatch`.
+NEXTPATH is built by a dedicated 4-person multidisciplinary engineering team for **IMPACT 2026**:
 
-### ⚙️ For Backend Developers
-- Use the pure evaluator functions in `src/eligibility-engine.ts` and `src/match-engine.ts` directly in your route handlers.
-- Endpoints:
-  - `POST /api/search/ai` $\rightarrow$ parses natural query and filters database.
-  - `GET /api/opportunities/:id/eligibility` $\rightarrow$ evaluates student against opportunity.
-  - `POST /api/assistant/draft-letter` $\rightarrow$ drafts grounded letter.
+| Member | Role | Core Responsibilities |
+| :--- | :--- | :--- |
+| **Ahmed Elhennawy** | **AI & Database Lead** | Supabase database schema, RLS policies, deterministic rule engine, Gemini AI pipeline, vector search embeddings, motivation letter generator. |
+| **Team Member 2** | **Frontend & UI/UX Lead** | Next.js client application, responsive dashboard, opportunity discovery feed, eligibility verdict badges, interactive modals. |
+| **Team Member 3** | **Backend Engineer** | REST API routing, authentication middleware, opportunity indexing & search endpoints. |
+| **Team Member 4** | **Backend Engineer** | Application tracker service, document management, notification & deadline reminder pipeline. |
 
 ---
 

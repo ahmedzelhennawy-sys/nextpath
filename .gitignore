@@ -10,6 +10,10 @@ node_modules/
 .env.test.local
 .env.production.local
 
+# Agent / Tooling Local Cache
+.agents/
+skills-lock.json
+
 # Build & Dist
 dist/
 build/
