@@ -23,6 +23,18 @@ export function evaluateRequirement(
     if (!profile.nationality) {
       return { requirement: req, passed: false, isUnknown: true, reason: "Profile is missing nationality." };
     }
+    if (req.operator === "not_in") {
+      const excluded = Array.isArray(val.values) ? val.values : [val.value];
+      const isExcluded = excluded.map((s: string) => s.toLowerCase()).includes(profile.nationality.toLowerCase());
+      return {
+        requirement: req,
+        passed: !isExcluded,
+        isUnknown: false,
+        reason: isExcluded
+          ? `Program excludes [${excluded.join(", ")}]; student is ${profile.nationality}.`
+          : `Nationality (${profile.nationality}) is allowed (not in excluded list).`,
+      };
+    }
     const allowed = Array.isArray(val.values) ? val.values : [val.value];
     const isAllowed = allowed.map((s: string) => s.toLowerCase()).includes(profile.nationality.toLowerCase());
     return {
@@ -148,6 +160,30 @@ export function evaluateRequirement(
       reason: passed
         ? `Student has verified experience records.`
         : `Program prefers ${requiredYears}+ years experience, student has recorded ${expCount} positions.`,
+    };
+  }
+
+  // 8. Team Size Min (hackathons: e.g. teams of 2+)
+  if (reqType === "team_size_min") {
+    const min = Number(val.value);
+    // Profile doesn't carry team_size today; this req is informational
+    // until the application flow collects team composition.
+    return {
+      requirement: req,
+      passed: true,
+      isUnknown: true,
+      reason: `Teams of ${min}+ required (collected at application time).`,
+    };
+  }
+
+  // 9. Team Size Max
+  if (reqType === "team_size_max") {
+    const max = Number(val.value);
+    return {
+      requirement: req,
+      passed: true,
+      isUnknown: true,
+      reason: `Max team size ${max} (collected at application time).`,
     };
   }
 
