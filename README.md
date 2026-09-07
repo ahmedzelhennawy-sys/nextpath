@@ -2,11 +2,12 @@
 
 # 🧭 NEXTPATH
 ### Opportunity-Intelligence & Application-Readiness Platform
-**IMPACT 2026 Hackathon**
+**Team: New Era** | **IMPACT 2026 Hackathon**
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![Team](https://img.shields.io/badge/Team-New%20Era-FF5722?style=for-the-badge)](https://github.com/ahmedzelhennawy-sys/nextpath)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 <p align="center">
@@ -17,7 +18,7 @@
 [The Golden Rule](#-the-golden-rule) •
 [Architecture](#-system-architecture) •
 [Quickstart](#-quickstart--demo) •
-[Team & Contributors](#-team--contributors)
+[Team & Contributors](#-team-new-era--contributors)
 
 ---
 
@@ -140,9 +141,9 @@ npx tsx src/demo.ts
 
 ---
 
-## 👥 Team & Contributors
+## 👥 Team New Era • Contributors
 
-NEXTPATH is built by a dedicated 4-person multidisciplinary engineering team for **IMPACT 2026**:
+NEXTPATH is built by **Team New Era**, a 4-person engineering team for **IMPACT 2026**:
 
 | Member | Role | Core Responsibilities |
 | :--- | :--- | :--- |
@@ -154,5 +155,5 @@ NEXTPATH is built by a dedicated 4-person multidisciplinary engineering team for
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by the NEXTPATH Team for the IMPACT 2026 Hackathon.</sub>
+  <sub>Built with ❤️ by <b>Team New Era</b> for the IMPACT 2026 Hackathon.</sub>
 </div>
