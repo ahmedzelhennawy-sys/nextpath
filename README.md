@@ -6,7 +6,8 @@
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com)
-[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.5%20Flash-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+[![OpenRouter](https://img.shields.io/badge/OpenRouter-Free%20Tier-6366F1?style=for-the-badge&logo=openrouter&logoColor=white)](https://openrouter.ai/)
+[![NVIDIA Embeddings](https://img.shields.io/badge/NVIDIA-Nemotron%20Embed-76B900?style=for-the-badge&logo=nvidia&logoColor=white)](https://build.nvidia.com)
 [![Team](https://img.shields.io/badge/Team-New%20Era-FF5722?style=for-the-badge)](https://github.com/ahmedzelhennawy-sys/nextpath)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
@@ -63,7 +64,7 @@ flowchart TD
     end
 
     subgraph ENGINES ["⭐ 3. Core Logic & AI Layer"]
-        NL_PARSER["AI Query Parser (Gemini / Heuristic)"]
+        NL_PARSER["AI Query Parser (OpenRouter / Heuristic)"]
         RULE_ENGINE["Deterministic Eligibility Evaluator"]
         MATCH_ENGINE["Match Scorer & Gap Analyzer"]
         LETTER_AI["Grounded Letter Drafter (Zero Hallucination)"]
@@ -113,7 +114,7 @@ NEXTPATH/
     ├── match-engine.ts          # Match Scoring (0-100%) & Profile Gap Analysis
     ├── ai-search.ts             # Conversational Natural-Language Query Parser
     ├── ai-assistant.ts          # Grounded Motivation Letter Generator
-    ├── gemini-client.ts         # Google Gemini 2.5 Flash & text-embedding-004 client
+    ├── openrouter-client.ts     # OpenRouter client (free tier text + embeddings)
     └── demo.ts                  # End-to-end verification demo & test suite
 ```
 
@@ -128,10 +129,10 @@ cd nextpath
 npm install
 ```
 
-### 2. Configure Environment (Optional for Live Gemini API)
+### 2. Configure Environment (Optional for Live OpenRouter API)
 ```bash
 cp .env.example .env.local
-# Add your GEMINI_API_KEY and SUPABASE keys
+# Add your OPENROUTER_API_KEY and SUPABASE keys
 ```
 
 ### 3. Run the Live Test Suite
@@ -147,7 +148,7 @@ NEXTPATH is built by **Team New Era**, a 4-person engineering team for **IMPACT 
 
 | Member | Role | Core Responsibilities |
 | :--- | :--- | :--- |
-| **Ahmed Elhennawy** | **AI & Database Lead** | Supabase database schema, RLS policies, deterministic rule engine, Gemini AI pipeline, vector search embeddings, motivation letter generator. |
+| **Ahmed Elhennawy** | **AI & Database Lead** | Supabase database schema, RLS policies, deterministic rule engine, OpenRouter LLM pipeline, vector search embeddings, motivation letter generator. |
 | **Team Member 2** | **Frontend & UI/UX Lead** | Next.js client application, responsive dashboard, opportunity discovery feed, eligibility verdict badges, interactive modals. |
 | **Team Member 3** | **Backend Engineer** | REST API routing, authentication middleware, opportunity indexing & search endpoints. |
 | **Team Member 4** | **Backend Engineer** | Application tracker service, document management, notification & deadline reminder pipeline. |

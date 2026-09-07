@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS opportunities (
   source_url TEXT NOT NULL,
   last_verified_at TIMESTAMPTZ,
   verification_status TEXT NOT NULL DEFAULT 'unverified' CHECK (verification_status IN ('verified', 'unverified', 'expired')),
-  embedding vector(768),
+  embedding vector(2048),  -- nvidia/nemotron-3-embed-1b via OpenRouter. See scripts/migrate-embedding-dim.sql if switching embedders.
   created_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now()),
   updated_at TIMESTAMPTZ DEFAULT timezone('utc'::text, now())
 );
