@@ -13,7 +13,20 @@
  */
 
 import { createClient } from "@supabase/supabase-js";
+import { readFileSync } from "fs";
 import { generateEmbedding, getEmbeddingDim } from "../src/openrouter-client";
+
+// Load .env.local (no dotenv dep needed for a one-shot script).
+try {
+  const envLines = readFileSync(".env.local", "utf8").split("\n");
+  for (const line of envLines) {
+    const m = line.match(/^\s*([A-Z_][A-Z0-9_]*)\s*=\s*(.+?)\s*$/);
+    if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
+  }
+} catch (e) {
+  console.error("Could not read .env.local:", (e as Error).message);
+  process.exit(1);
+}
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL || "",
@@ -51,9 +64,31 @@ async function main() {
       .filter(Boolean)
       .join(" | ");
 
-    const vec = await generateEmbedding(text);
+    let vec: number[] | null = null;
+    let attempt = 0;
+    const maxAttempts = 3;
+    while (attempt < maxAttempts && !vec) {
+      vec = await generateEmbedding(text);
+      if (!vec) {
+        attempt++;
+        if (attempt < maxAttempts) {
+          const backoff = 2000 * attempt; // 2s, 4s, 6s
+          console.warn(`  ↻ ${opp.title} — retry ${attempt}/${maxAttempts - 1} in ${backoff}ms`);
+          await new Promise((r) => setTimeout(r, backoff));
+        }
+      }
+    }
+
     if (!vec) {
-      console.warn(`  ✗ ${opp.title} — embedding returned null`);
+      console.warn(`  ✗ ${opp.title} — embedding returned null after ${maxAttempts} attempts`);
+      fail++;
+      continue;
+    }
+
+    if (vec.length !== getEmbeddingDim()) {
+      console.warn(
+        `  ✗ ${opp.title} — dim mismatch: got ${vec.length}, expected ${getEmbeddingDim()}`,
+      );
       fail++;
       continue;
     }

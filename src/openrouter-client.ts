@@ -77,7 +77,23 @@ export async function generateEmbedding(text: string): Promise<number[] | null> 
       }),
     });
     if (!res.ok) {
-      console.error(`[OpenRouter embed ${res.status}]:`, await res.text());
+      const body = await res.text();
+      // 429 from OpenRouter free tier: surface the reset time clearly.
+      if (res.status === 429) {
+        try {
+          const j = JSON.parse(body);
+          const reset = j?.metadata?.headers?.["X-RateLimit-Reset"];
+          const resetHuman = reset ? new Date(Number(reset)).toISOString() : "unknown";
+          console.error(
+            `[OpenRouter embed 429 — free-tier daily quota exhausted. Reset at ${resetHuman}. ` +
+              `Either wait, or buy credits. Full body: ${body.slice(0, 300)}`,
+          );
+        } catch {
+          console.error(`[OpenRouter embed 429]:`, body.slice(0, 300));
+        }
+      } else {
+        console.error(`[OpenRouter embed ${res.status}]:`, body.slice(0, 300));
+      }
       return null;
     }
     const data = (await res.json()) as { data?: { embedding?: number[] }[] };
