@@ -13,15 +13,29 @@ const supabase = createClient(
 );
 
 async function main() {
-  // Probe the column dim by trying to write a 1-element vector.
-  // If column is vector(2048), this fails with "expected 2048 dimensions".
-  // If column is vector(768), it fails with "expected 768 dimensions".
-  // If column is unconstrained vector, it succeeds.
-  const { error } = await supabase
+  // Try writing a 2048-dim vector. If the column IS 2048, it'll succeed (the value will fit).
+  // If it's still 768, we'll get "expected 768 dimensions, not 2048".
+  const bigVec = new Array(2048).fill(0).join(",");
+  const { error: e2048 } = await supabase
     .from("opportunities")
-    .update({ embedding: "[0.5]" })
+    .update({ embedding: `[${bigVec}]` })
     .eq("id", "a0000001-0000-0000-0000-000000000001");
-  console.log("1-dim update error message:", error?.message ?? "(none)");
+  console.log("2048-dim write:", e2048?.message ?? "OK");
+
+  // Revert
+  await supabase
+    .from("opportunities")
+    .update({ embedding: null })
+    .eq("id", "a0000001-0000-0000-0000-000000000001");
+
+  // Try writing a 768-dim vector
+  const vec768 = new Array(768).fill(0).join(",");
+  const { error: e768 } = await supabase
+    .from("opportunities")
+    .update({ embedding: `[${vec768}]` })
+    .eq("id", "a0000001-0000-0000-0000-000000000001");
+  console.log("768-dim write:", e768?.message ?? "OK");
+
   // Revert
   await supabase
     .from("opportunities")
