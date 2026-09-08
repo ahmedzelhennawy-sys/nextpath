@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { calculateMatch } from "./score";
+describe("match scoring", () => it("changes only the skills component when a skill is added", () => { const req = { relevantSkills: ["typescript"], relevantMajors: ["computer science"] }; const a = calculateMatch({ majors: ["computer science"] }, req); const b = calculateMatch({ majors: ["computer science"], skills: ["typescript"] }, req); expect(b.breakdown.find(x => x.component === "skills")!.score).toBeGreaterThan(a.breakdown.find(x => x.component === "skills")!.score); expect(b.breakdown.find(x => x.component === "major")!.score).toBe(a.breakdown.find(x => x.component === "major")!.score); }));
